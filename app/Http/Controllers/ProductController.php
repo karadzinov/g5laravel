@@ -6,6 +6,8 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
+use App\Rules\PasswordInt;
 
 class ProductController extends Controller
 {
@@ -36,6 +38,20 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'title' => ['required'],
+            'quantity' => ['required', 'integer'],
+            'price' => 'required',
+            'description' => 'required',
+            "user_id" => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('products.create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         Product::create([
             "title" => $request->get('title'),
             "quantity" => $request->get("quantity"),

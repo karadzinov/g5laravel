@@ -26,3 +26,9 @@ Route::delete('/users/{user}', [App\Http\Controllers\UserController::class, 'des
 Route::resource('/products', App\Http\Controllers\ProductController::class);
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'welcome']);
