@@ -1,16 +1,17 @@
 @extends('layouts.dashboard')
 @section('content')
     <div class="row">
-         <p>{{ $user->name }}</p>
-         <p>{{ $user->email }}</p>
+         <p>{{ $product->title }}</p>
+         <p>{{ $product->quantity }}</p>
+         <p>{{ $product->user->name }}</p>
     </div>
 
     <div class="row">
-        <form action="{{ route('users.destroy', $user->id ) }}" method="post">
+        <form action="{{ route('products.destroy', $product->id ) }}" method="post">
             @csrf
             @method('delete')
 
-            <button type="submit" class="btn btn-danger">Delete User</button>
+            <button type="submit" class="btn btn-danger">Delete Product</button>
 
         </form>
     </div>

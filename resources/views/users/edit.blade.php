@@ -18,6 +18,17 @@
                     <input type="text" class="form-control" id="email" name="email" value="{{ $user->email }}">
                 </div>
             </div>
+
+            <div class="mb-3 row">
+                <label for="role" class="col-sm-2 col-form-label">Role</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="role_id" name="role_id">
+                        @foreach($roles as $role)
+                            <option value="{{ $role->id }}" @if($user->role_id  === $role->id) selected @endif>{{ $role->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
             <div class="mb-3 row">
                 <label for="password" class="col-sm-2 col-form-label">Password</label>
                 <div class="col-sm-10">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -31,19 +32,24 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('users.create');
+        $roles = Role::all();
+
+        $data = ['roles' => $roles];
+        return view('users.create')->with($data);
     }
 
     public function store(Request $request)
     {
         $name = $request->get('name');
         $email = $request->get('email');
+        $role_id = $request->get('role_id');
         $password = Hash::make($request->get('password'));
 
         User::create([
             "name" => $name,
             "email" => $email,
-            "password" => $password
+            "password" => $password,
+            "role_id" => $role_id
         ]);
 
         return redirect()->route('users.index');
@@ -52,7 +58,8 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        $data = ['user' => $user];
+        $roles = Role::all();
+        $data = ['user' => $user, 'roles' => $roles];
         return view('users.edit')->with($data);
     }
 

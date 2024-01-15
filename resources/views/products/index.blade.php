@@ -21,6 +21,8 @@
                         <th>Quantity</th>
                         <th>Description</th>
                         <th>Created at</th>
+                        <th>Updated at</th>
+                        <th>User</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -33,11 +35,15 @@
                             <td>{{ $product->quantity }}</td>
                             <td>{!!  \Illuminate\Support\Str::limit($product->description, 13)  !!}</td>
                             <td>{{ \Carbon\Carbon::parse($product->created_at)->diffForHumans() }}</td>
+                            <td>{{ \Carbon\Carbon::parse($product->updated_at)->diffForHumans() }}</td>
+                            <td>{{ $product->user->name }}</td>
                             <td><a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning">Edit</a></td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
+
+                {{ $products->links() }}
             </div>
         </div>
     </div>

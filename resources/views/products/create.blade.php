@@ -58,7 +58,6 @@
             <div class="mb-3 row">
                 <label for="user_id">Select User</label>
                 <select class="form-control @error('user_id') is-invalid @enderror" name="user_id" id="user_id">
-                    <option>Select User</option>
                     @foreach($users as $user)
                         <option value="{{ $user->id }}">{{ $user->name }}</option>
                     @endforeach

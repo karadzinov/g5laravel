@@ -3,7 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Product;
 use Illuminate\Database\Seeder;
+use Webpatser\Countries\CountriesServiceProvider;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,7 +15,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(100)->create();
+        // $this->call(RoleSeeder::class);
+       //  $this->call(ProductSeeder::class);
+       //  \App\Models\User::factory(10)->create();
+
+       // Product::factory(20)->create();
+
+        $this->call(CountriesSeeder::class);
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

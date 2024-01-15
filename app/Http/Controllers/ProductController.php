@@ -16,7 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(5);
         $data = ["products" => $products];
 
         return view('products.index')->with($data);
@@ -69,17 +69,24 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        //
+        $product = Product::where("id", "=", $id)->first();
+        $data = ['product' => $product];
+
+        return view('products.show')->with($data);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        $product = Product::FindOrFail($id);
+        $users = User::all();
+        $data = ['product' => $product, 'users' => $users];
+
+        return view('products.edit')->with($data);
     }
 
     /**
@@ -87,14 +94,33 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'title' => ['required'],
+            'quantity' => ['required', 'integer'],
+            'price' => 'required',
+            'description' => 'required',
+            "user_id" => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('products.edit', $product->id)
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $product->fill($request->all())->save();
+
+        return redirect()->route('products.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        $product = Product::FindOrFail($id);
+        $product->delete();
+
+        return redirect()->route('products.index');
     }
 }
