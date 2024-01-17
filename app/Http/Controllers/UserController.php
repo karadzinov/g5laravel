@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
+
 class UserController extends Controller
 {
 
@@ -81,6 +82,11 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
+
+        if(auth()->user()->id === $user->id)
+        {
+            return redirect()->route('users.index');
+        }
         $user->delete();
         return redirect()->route('users.index');
     }
