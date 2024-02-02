@@ -12,6 +12,22 @@
         </ul>
     </div>
 
+
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
+
+    <form action="{{ route('users.mail', $user->email ) }}" method="post">
+        @csrf
+        @method('post')
+        <button type="submit" class="btn btn-danger">Send Email</button>
+
+    </form>
+
+
+
     <div class="row">
         <form action="{{ route('users.destroy', $user->id ) }}" method="post">
             @csrf

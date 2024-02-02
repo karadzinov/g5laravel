@@ -22,7 +22,7 @@ class ProductFactory extends Factory
             'price' => rand(1000, 3444),
             'quantity' => rand(3, 100),
             'publish' => true,
-            'user_id' => rand(1, 10),
+            'user_id' => rand(2, 10),
             'description' => fake()->text(),
             'slug' => Str::slug(fake()->title())
         ];

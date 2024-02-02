@@ -25,7 +25,7 @@
                     <tbody>
                     @foreach($users as $user)
                         <tr>
-                            <td><a href="/users/{{ $user->id }}">{{ $user->id }}</a></td>
+                            <td><a href="/dashboard/users/{{ $user->id }}">{{ $user->id }}</a></td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->role->name }}</td>
@@ -35,6 +35,28 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="row">
+        <div class="col-12">
+
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
+
+            <form action="{{ route('users.disable') }}" method="post">
+                @csrf
+                @method('post')
+                <button type="submit" class="btn btn-danger">Disable users</button>
+
+            </form>
         </div>
     </div>
 @endsection

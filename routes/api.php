@@ -19,4 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::resource('/users',App\Http\Controllers\Api\UserController::class)->middleware('auth:api');
+Route::middleware(['auth:api'])->as('api.')->group(function () {
+
+    Route::resource('/users', App\Http\Controllers\Api\UserController::class)->middleware('auth:api');
+
+});
