@@ -16,6 +16,7 @@
                     <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Image</th>
                         <th>Title</th>
                         <th>Price</th>
                         <th>Quantity</th>
@@ -30,6 +31,7 @@
                     @foreach($products as $product)
                         <tr>
                             <td><a href="/products/{{ $product->id }}">{{ $product->id }}</a></td>
+                            <td><img src="/assets/img/products/thumbnails/{{ $product->image }}" alt="{{  $product->title }}" style="width: 40px; height: 40px"></td>
                             <td>{{ $product->title }}</td>
                             <td>{{ $product->price }}</td>
                             <td>{{ $product->quantity }}</td>

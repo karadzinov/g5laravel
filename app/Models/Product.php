@@ -16,7 +16,8 @@ class Product extends Model
         'publish',
         'user_id',
         'description',
-        'slug'
+        'slug',
+        'image'
     ];
 
     public function user()

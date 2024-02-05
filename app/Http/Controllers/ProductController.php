@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use App\Rules\PasswordInt;
+use App\Http\Helper\ImageStore;
 
 class ProductController extends Controller
 {
@@ -52,6 +53,13 @@ class ProductController extends Controller
                 ->withInput();
         }
 
+        $image = '';
+        if($request->hasFile('image'))
+        {
+            $imageStore = new ImageStore($request, 'products');
+            $image = $imageStore->imageStore();
+        }
+
         Product::create([
             "title" => $request->get('title'),
             "quantity" => $request->get("quantity"),
@@ -59,7 +67,8 @@ class ProductController extends Controller
             "description" => $request->get("description"),
             "user_id" => $request->get("user_id"),
             "slug" => Str::slug($request->get('title')),
-            "publish" => true
+            "publish" => true,
+            "image" => $image
         ]);
 
         return redirect()->route('products.index');

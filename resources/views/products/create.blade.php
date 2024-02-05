@@ -1,9 +1,24 @@
 @extends('layouts.dashboard')
 @section('content')
 
-    <form action="{{ route('products.store') }}" method="post">
+    <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="row mt-4">
+
+            <div class="mb-3 row">
+                <label for="name" class="col-sm-2 col-form-label">Image</label>
+                <div class="col-sm-10">
+                    <input type="file" class="form-control  @error('image') is-invalid @enderror" id="image" name="image"
+                           value="{{ old('image') }}">
+                    @error('image')
+                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                    @enderror
+                </div>
+
+            </div>
+
             <div class="mb-3 row">
                 <label for="name" class="col-sm-2 col-form-label">Title</label>
                 <div class="col-sm-10">
