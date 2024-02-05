@@ -26,7 +26,8 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::put('/users/{user}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [App\Http\Controllers\UserController::class, 'destroy'])->name('users.destroy');
     Route::resource('/products', App\Http\Controllers\ProductController::class);
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('role:Administrator');
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::resource('/categories', App\Http\Controllers\CategoryController::class);
 });
 
 
